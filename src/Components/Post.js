@@ -7,7 +7,6 @@ const Post = () => {
 
   const onSubmit = (e) => {
     e.preventDefault();
-    console.log({userId, title, body});
 		fetch('https://jsonplaceholder.typicode.com/posts', {
 			method: 'POST', 
 			body: JSON.stringify({userId, title, body})
