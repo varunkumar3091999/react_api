@@ -1,36 +1,19 @@
-import { useEffect, useState } from 'react';
-// import './App.css';
+import {BrowserRouter as Router, Route, Switch} from 'react-router-dom'
+
+import Get from './Components/Get'
+import Post from './Components/Post'
 
 function App() {
 
-  const [items, setItems] = useState([])
-  const [isLoaded, setIsLoaded] = useState(false)
-
-  useEffect(() => {
-    fetch('https://jsonplaceholder.typicode.com/users')
-      .then((res) => res.json())
-      .then(json => {
-        setItems(json)
-        setIsLoaded(true)
-        console.log(json)
-      })
-  }, [])
-
-  if(!isLoaded) {
-    return <>Loading...</>
-  } 
-
   return (
-    <div className="App">
-      <ul>
-        {items.map((item) => (
-          <li key={item.id}>
-            Name: {item.name} | Email: {item.email} 
-          </li>
-        ))}
-      </ul>
-    </div>
-  );
+    <Router>
+      <Switch>
+        <Route path="/get" component={Get}/>
+        <Route path="/post" component={Post}/>
+      </Switch>
+    </Router>
+  )
+  
 }
 
 export default App;
