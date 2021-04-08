@@ -2,27 +2,29 @@ import { useState } from "react";
 
 const Post = () => {
   const [userId, setUserId] = useState("");
-  const [title, setTitle] = useState("");
-  const [body, setBody] = useState("");
+  const [firstName, setFirstName] = useState("");
+  const [lastName, setLastName] = useState("");
 
   const onSubmit = (e) => {
     e.preventDefault();
-		fetch('https://jsonplaceholder.typicode.com/posts', {
-			method: 'POST', 
-			body: JSON.stringify({userId, title, body})
-		})
-		.then(response => response.json())
-		.then(data => console.log(data))
-		.catch(err => console.log(err))
+    console.log({ firstName, lastName })
+    fetch("http://localhost:7777/users/", {
+      method: "POST",
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({"firstName": firstName, "lastName": lastName}),
+    })
+      .then((response) => response.json())
+      .then((data) => console.log(data))
+      .catch((err) => console.log(err));
   };
 
   const onChange = (e) => {
-    if (e.target.name === "userId") {
-      setUserId(e.target.value);
-    } else if (e.target.name === "title") {
-      setTitle(e.target.value);
-    } else if (e.target.name === "body") {
-      setBody(e.target.value);
+    if (e.target.name === "firstName") {
+      setFirstName(e.target.value);
+    } else if (e.target.name === "lastName") {
+      setLastName(e.target.value);
     } else {
       console.log(" no name ");
     }
@@ -33,30 +35,20 @@ const Post = () => {
       <div>
         <input
           type="text"
-          name="userId"
-          placeholder="User Id"
+          name="firstName"
+          placeholder="firstName"
           required
-          value={userId}
+          value={firstName}
           onChange={(e) => onChange(e)}
         />
       </div>
       <div>
         <input
           type="text"
-          name="title"
-          placeholder="title"
+          name="lastName"
+          placeholder="lastName"
           required
-          value={title}
-          onChange={(e) => onChange(e)}
-        />
-      </div>
-      <div>
-        <input
-          type="text"
-          name="body"
-          placeholder="body"
-          required
-          value={body}
+          value={lastName}
           onChange={(e) => onChange(e)}
         />
       </div>

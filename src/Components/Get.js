@@ -2,14 +2,15 @@ import { useEffect, useState } from 'react';
 
 
 const Get = () => {
-    const [items, setItems] = useState([])
+    const [users, setUsers] = useState([])
   const [isLoaded, setIsLoaded] = useState(false)
 
   useEffect(() => {
-    fetch('https://jsonplaceholder.typicode.com/users')
+    fetch('http://localhost:7777/users')
       .then((res) => res.json())
       .then(json => {
-        setItems(json)
+        console.log(json)
+        setUsers(json.users)
         setIsLoaded(true)
         console.log(json)
       })
@@ -21,13 +22,13 @@ const Get = () => {
 
   return (
     <div className="App">
-      <ul>
-        {items.map((item) => (
+      <ol>
+        {users.map((item) => (
           <li key={item.id}>
-            Name: {item.name} | Email: {item.email} 
+            {item.firstName}{' '}{item.lastName} 
           </li>
         ))}
-      </ul>
+      </ol>
     </div>
   );
 }
