@@ -1,19 +1,19 @@
 import { useState } from "react";
 
-const Patch = () => {
+const Put = () => {
   const [id, setId] = useState("");
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
 
   const onSubmit = (e) => {
     e.preventDefault();
-    console.log({firstName, lastName})
+    console.log(JSON.stringify({firstName,lastName}))
 		fetch(`http://localhost:7777/users/${id}`, {
-			method: 'PATCH', 
+			method: 'PUT', 
       headers: {
         'Content-type': 'application/json'
       },
-      body: JSON.stringify({"firstName": firstName, "lastName": lastName}),
+      body: JSON.stringify({firstName,lastName})
 		})
 		.then(response => response.json())
 		.then(data => console.log('data => ', data))
@@ -69,4 +69,4 @@ const Patch = () => {
   );
 };
 
-export default Patch;
+export default Put;
